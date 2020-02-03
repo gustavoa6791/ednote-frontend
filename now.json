@@ -1,8 +1,6 @@
 {
-    "name": "ednote-home",
+    "name": "ednote",
     "version": 2,
-    "builds": [{ "src": "index.js", "use": "@now/node" }],
-    "routes": [{ "src": "/(.*)", "dest": "/index.js" }],
     "env": {
     "API_URL" : "@ednote.home-apiurl",
     "API_KEY_TOKEN" : "@ednote.home-apikey"
