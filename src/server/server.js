@@ -5,9 +5,6 @@ import helmet from 'helmet'
 import passport from 'passport';
 import boom from '@hapi/boom';
 import cookieParser from 'cookie-parser';
-
-import axios from 'axios';
-
 import main from './routes/main'
 
 
