@@ -63,5 +63,6 @@
     "webpack-dev-server": "^3.10.1",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-manifest-plugin": "^2.2.0"
+    
   }
 }
