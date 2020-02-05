@@ -1,7 +1,9 @@
 {
+    "name":"ednote",
+    
     "build": {
         "env": {
-            "API_URL": "@ednote.home-apiurl",
+            "API_URL": "@ednote.home-API_URL",
             "API_KEY_TOKEN ": "@ednote.home-apikey"
         }
     }

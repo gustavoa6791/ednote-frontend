@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node src/server/index.js ",
+    "build": "webpack --config webpack.config.js ",
     "start:dev": "nodemon src/server/index.js --exact babel-node ",
     "start:pro": "node src/server/index.js "
   },
@@ -63,7 +63,7 @@
     "webpack-dev-server": "^3.10.1",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-manifest-plugin": "^2.2.0"
-    
+
 
   }
 }
