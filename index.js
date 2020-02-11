@@ -13,4 +13,4 @@ require('asset-require-hook')({
 
 
 
-require('./server.js')
+require('./src/server/server.js')
