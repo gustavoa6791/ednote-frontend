@@ -4,7 +4,7 @@
     
     "build": {
         "env": {
-            "NODE_ENV": "production",
+            
             "API_URL": "@ednote.home-api_url",
             "API_KEY_TOKEN": "@ednote.home-apikey"
         }
