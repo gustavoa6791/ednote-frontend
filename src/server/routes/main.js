@@ -13,22 +13,17 @@ import render from '../render/index'
 const main = (req,res, next )=>{
     
     try {
-
         let initialState
-
         try {
-            const {token,email,name,id}= req.cookies
-
+            const { token,email,name,id, rol}= req.cookies
             initialState = {
                 user:{
                     id,
                     email,
                     name,
-
+                    rol,
                 }
-
-            }
-            
+            } 
         } catch (error) {
             
         }

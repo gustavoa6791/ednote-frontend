@@ -16,8 +16,9 @@ if (typeof window !== 'undefined') {
     
 
     let composeEnhacers;
-    if (process.env.NODE_ENV === 'production') composeEnhacers = compose;
-    else composeEnhacers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//    if (process.env.NODE_ENV === 'production') composeEnhacers = compose;
+//  else 
+    composeEnhacers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     
     const preloadedState = window.__PRELOADED_STATE__
     const store = createStore(reducer, preloadedState, composeEnhacers(applyMiddleware(thunk)))

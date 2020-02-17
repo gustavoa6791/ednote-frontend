@@ -1,0 +1,45 @@
+h2{
+   
+    margin: 5% 0 5% 10%;
+}
+
+.remember{
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 200px);
+    flex-direction: column;
+ 
+}
+
+.container-rem{
+    margin-left: 10%;
+    
+    width: 60%;
+    padding: 20px;
+    border: 2px #F0544F solid;
+    border-radius: 20px;
+    
+}
+
+.input-rem{
+    width: 50%;
+    background-color: transparent;
+    border: none;    
+    border-bottom: 2px #F0544F solid ;
+    margin-bottom: 30px;
+    padding: 0 0 10px 20px;
+    outline: none;
+}
+
+.button-rem{
+    background-color: #F0544F;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 20px;
+}
+
+.button-rem:hover{
+    background-color: #ad3f4c;
+    
+}

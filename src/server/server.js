@@ -5,11 +5,13 @@ import helmet from 'helmet'
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import main from './routes/main'
+import  boom from '@hapi/boom';
+import axios from 'axios'
 
 dotenv.config()
 
 const ENV = process.env.NODE_ENV
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3000
 
 const app = express();
 
@@ -53,24 +55,54 @@ app.post('/auth/sign-in', async function (req, res, next) {
     passport.authenticate('basic', function (error, data) {
       try {
         if (error || !data) {
+          res.status(401).json(error)
           return next(error);
         }
+
         req.login(data, { session: false }, async function(error){
+
           if (error) {
             next(error);
+            
           }
+
           const { token, ...user } = data;
+
           res.cookie('token', token, {
             httpOnly: !(ENV === 'development'),
             secure: !(ENV === 'development'),
           });
+
           res.status(200).json(user.user);
+
         });
       } catch (error) {
-        next(error);
+        
+
+        next(error)
+
+
       }
     })(req, res, next);
   });
+
+//----------------------------------------
+app.post('/auth/remember', async function (req, res, next) {
+  try {
+    await axios({
+      url: `${process.env.API_URL}/api/auth/remember`,
+      method: "post",
+      data: {
+        emailToRemember: req.body
+      }
+    })
+    
+  } catch (error) {
+    
+    next(error)
+  }
+   
+});
 
 //----------------------------------------
 

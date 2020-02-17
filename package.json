@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js --colors",
+    "build": "webpack --config webpack.config.js --colors ",
     "dev": "nodemon src/server/index.js --exact babel-node ",
     "start": "node src/server/index.js "
   },
@@ -31,7 +31,8 @@
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sweetalert2": "^9.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",

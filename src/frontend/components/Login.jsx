@@ -1,28 +1,28 @@
-import React, {useState} from 'react';
-import {connect} from 'react-redux'
-import {loginUser} from '../redux/actions/index'
-import {withRouter} from 'react-router-dom'
+import React, { useState } from 'react';
+import { connect } from 'react-redux'
+import { loginUser } from '../redux/actions/index'
+import { withRouter, Link } from 'react-router-dom'
 
 import '../assets/styles/login.scss'
 
 const Login = props => {
 
-    const [values, setValues]= useState({
+    const [values, setValues] = useState({
         email: ''
     })
 
-    const handleInput = event =>{
+    const handleInput = event => {
         setValues({
             ...values,
             [event.target.name]: event.target.value
         })
     }
 
-    const handleSubmit = event =>{
+    const handleSubmit = event => {
         event.preventDefault()
 
-        props.loginUser(values, '/estudiante')
-        
+        props.loginUser(values, '/Home')
+
     }
 
     return (
@@ -57,7 +57,10 @@ const Login = props => {
                             </button>
 
                             <div className="recovery">
-                                <a href="">Olvide mi Contaseña</a>
+                                <Link to="/Remember">
+                                    Olvide mi Contaseña
+                                </Link>
+
                             </div>
 
                         </form>
@@ -73,8 +76,8 @@ const Login = props => {
     );
 }
 
-const mapDispatchToProps={
+const mapDispatchToProps = {
     loginUser
 }
 
-export default withRouter(connect(null,mapDispatchToProps)(Login))
+export default withRouter(connect(null, mapDispatchToProps)(Login))

@@ -4,12 +4,13 @@ import boom from '@hapi/boom';
 import dotenv from 'dotenv';
 import axios from 'axios';
 
+
 dotenv.config();
 
 passport.use(
   new BasicStrategy(async function(email, password, cb) {
-    try {
-      const { data, status } = await axios({
+
+      await axios({
         url: `${process.env.API_URL}/api/auth/sign-in`,
         method: "post",
         auth: {
@@ -19,17 +20,28 @@ passport.use(
         data: {
           apiKeyToken: `${process.env.API_KEY_TOKEN}`
         }
-      });
+      })
+      .then(function (response) {
 
-      if (!data || status !== 200) {
-        return cb(boom.unauthorized(), false);
-      }
-      
+       const  dataRes = response.data
+       const  statusRes = response.status
 
-      return cb(null, data);
-    } catch (error) {
+        if (!dataRes || statusRes !== 200) {
+          return cb("basic1",false);
+        }
 
-      cb(error);
-    }
-  })
-);
+        return cb(null, dataRes);
+  
+      })
+      .catch(function (error) {
+
+        if (error.response) {
+         
+         
+          return cb(error.response.data.message,false);
+        }
+
+      })
+})
+)   
+
