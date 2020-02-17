@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
-import { loginUser } from '../redux/actions/index'
+import { changePassword } from '../redux/actions/index'
 import { withRouter } from 'react-router-dom'
 
 import '../assets/styles/change.scss'
@@ -9,8 +9,7 @@ import '../assets/styles/change.scss'
 
 const Change = props => {
 
-    const [values, setValues] = useState({
-        email: ''
+    const [values, setValues] = useState({   
     })
 
     const handleInput = event => {
@@ -23,7 +22,7 @@ const Change = props => {
     const handleSubmit = event => {
         event.preventDefault()
 
-        props.loginUser(values, '/Home')
+        props.changePassword(values)
 
     }
 
@@ -52,7 +51,7 @@ const Change = props => {
                         />
                         <input
                             type="password"
-                            name="password"
+                            name="password2"
                             className="input-change"
                             onChange={handleInput}
                             placeholder="Repita la nueva contraseña"
@@ -60,7 +59,7 @@ const Change = props => {
                         />
                         <input
                             type="text"
-                            name="password"
+                            name="codigo"
                             className="input-change"
                             onChange={handleInput}
                             placeholder="Codigo"
@@ -81,7 +80,7 @@ const Change = props => {
 }
 
 const mapDispatchToProps = {
-    loginUser
+    changePassword
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(Change))

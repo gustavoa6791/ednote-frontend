@@ -27,6 +27,11 @@ export const rememberRequest = payload => ({
   payload,
 });
 
+export const changeRequest = payload => ({
+  type: 'CHANGE_REQUEST',
+  payload,
+});
+
 export const registerUser = (payload, redirecUrl) => {
   return (dispatch) => {
     axios.post('/auth/sign-up', payload)
@@ -36,6 +41,39 @@ export const registerUser = (payload, redirecUrl) => {
       .then(() => {
         window.location.href = redirecUrl;
       })
+
+      .catch(err => dispatch(setError(err)));
+  };
+};
+
+export const changePassword = ({email, password, codigo}) => {
+  return (dispatch) => {
+  
+    axios({
+      url: '/auth/change',
+      method: 'post',
+      data: {
+        email,
+        password,
+        codigo,
+      }
+    })
+      .then(({ data }) => {
+        dispatch(changeRequest(data));
+
+        Swal.fire({
+          title: 'Genial!',
+          text: 'el cambio de contraseña fue exitoso',
+          icon: 'success',
+          position: 'top',
+          toast: true,
+          timer: 5000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+
+        })
+      })
+   
 
       .catch(err => dispatch(setError(err)));
   };

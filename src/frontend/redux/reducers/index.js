@@ -16,6 +16,10 @@ const reducer = (state, action) => {
         return {
           ...state,
         };
+    case 'CHANGE_REQUEST':
+        return {
+          ...state,
+        };
     case 'LOGIN_REQUEST':
       return {
         ...state,
