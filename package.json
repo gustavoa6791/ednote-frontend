@@ -8,6 +8,7 @@
     "dev": "nodemon src/server/index.js --exact babel-node ",
     "start": "node src/server/index.js "
   },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",
