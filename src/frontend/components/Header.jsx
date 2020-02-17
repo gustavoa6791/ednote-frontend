@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
-import '../assets/styles/Header.scss'
+import '../assets/styles/header.scss'
 import logo from '../assets/static/note.svg'
 import { logoutRequest } from '../redux/actions/index'
 
@@ -34,11 +34,12 @@ const Header = ({ user }) => {
                 <h1 className="logo-nombre">EDnote</h1>
             </div>
 
+            {user.name ?
 
-            <div className="menu">
+                <div className="menu">
                 <div className="menu-profile">
                     <img src={logo} alt="logo" className="profile-imagen" />
-                    <p className="profile-name" >{user.name ? user.name : ""}</p>
+                    <p className="profile-name" >{ user.name}</p>
                 </div>
 
                 <div className="menu-options">
@@ -48,6 +49,12 @@ const Header = ({ user }) => {
                     </ul>
                 </div>
             </div>
+            :
+            <div className="menuinicial">
+                <Link to="/" >Iniciar Sesiòn</Link>
+                <Link to="/Remember" >Recordar Contraseña</Link>
+            </div>
+            }
         </header>
     );
 }

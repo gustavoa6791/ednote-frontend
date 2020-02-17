@@ -23,7 +23,7 @@ const Remember = props => {
     const handleSubmit = event =>{
       event.preventDefault()
 
-        props.rememberPassword(values)
+        props.rememberPassword(values , "/Change")
         
     }
 

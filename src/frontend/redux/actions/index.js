@@ -2,8 +2,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 
 export const setError = payload => ({
-
-
   type: 'SET_ERROR',
   payload,
 });
@@ -32,19 +30,49 @@ export const rememberRequest = payload => ({
 export const registerUser = (payload, redirecUrl) => {
   return (dispatch) => {
     axios.post('/auth/sign-up', payload)
+
       .then(({ data }) => dispatch(registerRequest(data)))
+
       .then(() => {
         window.location.href = redirecUrl;
       })
+
       .catch(err => dispatch(setError(err)));
   };
 };
 
-export const rememberPassword = (payload) => {
+export const rememberPassword = ({email}, redirecUrl) => {
   return (dispatch) => {
-    axios.post('/auth/remember', payload)
-      .then(({ data }) => dispatch(rememberRequest(data)))
-     
+    
+    
+    axios({
+      url: '/auth/remember',
+      method: 'post',
+      data: {
+        email
+      }
+    })
+      .then(({ data }) => {
+        dispatch(rememberRequest(data));
+
+        Swal.fire({
+          title: 'Genial!',
+          text: 'enviaremos la informacion al correo que proporcionaste',
+          icon: 'success',
+          position: 'top',
+          toast: true,
+          timer: 5000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+
+        })
+      })
+      .then(() => {
+        setTimeout(() => {
+          window.location.href = redirecUrl;
+        }, 5000);
+      })
+
       .catch(err => dispatch(setError(err)));
   };
 };
@@ -75,18 +103,17 @@ export const loginUser = ({ email, password }, redirecUrl) => {
           timer: 3000,
           timerProgressBar: true,
           showConfirmButton: false,
-          
         })
-
-
       })
+
       .then(() => {
-        setTimeout(()=>{
+        setTimeout(() => {
           window.location.href = redirecUrl;
 
-        },3000);
-       
+        }, 3000);
+
       })
+
       .catch(function (err) {
         console.log(err.response.data);
 
@@ -101,7 +128,7 @@ export const loginUser = ({ email, password }, redirecUrl) => {
             toast: true,
             timer: 3000,
             timerProgressBar: true,
-            confirmButtonColor:'#F0544F'
+            confirmButtonColor: '#F0544F'
           })
 
         } else if (err.response.data == "usuarioBloqueado") {
@@ -115,15 +142,10 @@ export const loginUser = ({ email, password }, redirecUrl) => {
             toast: true,
             timer: 3000,
             timerProgressBar: true,
-            confirmButtonColor:'#F0544F'
+            confirmButtonColor: '#F0544F'
           })
-
         }
-
-
-
         dispatch(setError(err))
-
       });
   };
 };

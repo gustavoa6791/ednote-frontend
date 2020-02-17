@@ -94,9 +94,16 @@ app.post('/auth/remember', async function (req, res, next) {
       method: "post",
       data: {
         emailToRemember: req.body
+        
       }
-    })
-    
+    }).then(
+        
+        
+      res.send("ok")
+      
+
+    )
+   
   } catch (error) {
     
     next(error)
