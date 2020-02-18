@@ -5,6 +5,8 @@ import NotFound from '../containers/NotFound.jsx'
 import HomePage from '../containers/HomePage.jsx'
 import RememberPage from '../containers/RememberPage.jsx'
 import ChangePage from '../containers/ChangePage.jsx'
+import ProfilePage from '../containers/ProfilePage.jsx'
+import UnlockPage from '../containers/UnlockPage.jsx'
 
 const serverRoutes = [
     {
@@ -20,6 +22,16 @@ const serverRoutes = [
     {
         path:'/Remember',
         component: RememberPage,
+        exact: true,
+    },
+    {
+        path:'/Profile',
+        component: ProfilePage,
+        exact: true,
+    },
+    {
+        path:'/Unlock',
+        component: UnlockPage,
         exact: true,
     },
     {

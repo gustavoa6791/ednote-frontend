@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-
 import { connect } from 'react-redux'
-
 import '../assets/styles/header.scss'
 import logo from '../assets/static/note.svg'
 import { logoutRequest } from '../redux/actions/index'
@@ -44,7 +42,7 @@ const Header = ({ user }) => {
 
                 <div className="menu-options">
                     <ul>
-                        <li><a href="/">Cuenta</a></li>
+                        <li><Link to="/Profile" >Cuenta</Link></li>
                         <li><a href="/" onClick={handleLogout}>Cerrar Sesión</a></li>
                     </ul>
                 </div>

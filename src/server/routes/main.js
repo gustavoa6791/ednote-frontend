@@ -22,6 +22,9 @@ const main = (req,res, next )=>{
                     email,
                     name,
                     rol,
+                },
+                users:{
+                    
                 }
             } 
         } catch (error) {

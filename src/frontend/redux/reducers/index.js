@@ -1,5 +1,5 @@
- 
- 
+
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'SET_FAVORITE':
@@ -13,18 +13,28 @@ const reducer = (state, action) => {
         myList: state.myList.filter(items => items.id !== action.payload),
       };
     case 'REMEMBER_REQUEST':
-        return {
-          ...state,
-        };
+      return {
+        ...state,
+      };
     case 'CHANGE_REQUEST':
-        return {
-          ...state,
-        };
+      return {
+        ...state,
+      };
     case 'LOGIN_REQUEST':
       return {
         ...state,
         user: action.payload,
       };
+    case 'SEARCH_REQUEST':
+      return {
+        ...state,
+        users: action.payload,
+      };
+      case 'SEARCH_REQUEST':
+        return {
+         ...state,
+          users: action.payload,
+        };
     case 'LOGOUT_REQUEST':
       return {
         ...state,
@@ -39,8 +49,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         playing: state.trends.find(item => item.id === Number(action.payload)) ||
-        state.originals.find(item => item.id === Number(action.payload)) ||
-        [],
+          state.originals.find(item => item.id === Number(action.payload)) ||
+          [],
       };
     default:
       return state;

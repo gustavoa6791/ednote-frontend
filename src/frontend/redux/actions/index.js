@@ -11,6 +11,16 @@ export const registerRequest = payload => ({
   payload,
 });
 
+export const searchRequest = payload => ({
+  type: 'SEARCH_REQUEST',
+  payload,
+});
+
+export const searchRequestAll = payload => ({ 
+  type: 'SEARCH_REQUEST_ALL',
+  payload,
+});
+
 export const logoutRequest = payload => ({
   type: 'LOGOUT_REQUEST',
   payload,
@@ -183,6 +193,48 @@ export const loginUser = ({ email, password }, redirecUrl) => {
             confirmButtonColor: '#F0544F'
           })
         }
+        dispatch(setError(err))
+      });
+  };
+};
+
+export const searchUser = (data) => {
+  
+  
+  return (dispatch) => {
+    axios({
+      url: '/auth/search',
+      method: 'post',
+      data: {
+        data : data.buscar
+      },
+    })
+      .then((data) => {
+        console.log(data.data)
+       
+        dispatch(searchRequest(data.data.users));
+        
+      })
+
+      .catch(function (err) {
+
+        dispatch(setError(err))
+      });
+  };
+};
+
+export const searchUserAll = () => {
+  return (dispatch) => {
+    axios({
+      url: '/auth/searchUserAll',
+      method: 'post',
+    })
+      .then(({ data }) => {
+        dispatch(searchRequestAll(data));
+      })
+
+      .catch(function (err) {
+
         dispatch(setError(err))
       });
   };
