@@ -42,6 +42,11 @@ export const changeRequest = payload => ({
   payload,
 });
 
+export const changeProfileRequest = payload => ({
+  type: 'CHANGE_PROFILE_REQUEST',
+  payload,
+});
+
 export const registerUser = (payload, redirecUrl) => {
   return (dispatch) => {
     axios.post('/auth/sign-up', payload)
@@ -210,10 +215,7 @@ export const searchUser = (data) => {
       },
     })
       .then((data) => {
-        console.log(data.data)
-       
         dispatch(searchRequest(data.data.users));
-        
       })
 
       .catch(function (err) {
@@ -223,14 +225,17 @@ export const searchUser = (data) => {
   };
 };
 
-export const searchUserAll = () => {
+export const changeProfile = (data) => {
   return (dispatch) => {
     axios({
-      url: '/auth/searchUserAll',
+      url: '/auth/changeProfile',
       method: 'post',
+      data: {
+        data : data
+      },
     })
       .then(({ data }) => {
-        dispatch(searchRequestAll(data));
+        dispatch(changeProfileRequest(data));
       })
 
       .catch(function (err) {

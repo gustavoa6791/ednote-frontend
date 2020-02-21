@@ -114,6 +114,23 @@ app.post('/auth/change', async function (req, res, next) {
 });
 
 //----------------------------------------
+app.post('/auth/changeProfile', async function (req, res, next) {
+  try {
+    await axios({
+      url: `${process.env.API_URL}/api/auth/changeProfile`,
+      method: "post",
+      data: {
+        data: req.body
+      }
+    }).then(
+      res.send("ok")
+    )
+  } catch (error) {
+    next(error)
+  }
+});
+
+//----------------------------------------
 app.post('/auth/search', async function (req, res, next) {
   
   
@@ -125,6 +142,8 @@ app.post('/auth/search', async function (req, res, next) {
         data: req.body
       }
     }).then((dataU)=>{
+
+     
 
       const {data}= dataU
       

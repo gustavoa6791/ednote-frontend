@@ -24,9 +24,6 @@ if (typeof window !== 'undefined') {
     const store = createStore(reducer, preloadedState, composeEnhacers(applyMiddleware(thunk)))
     const history = createBrowserHistory()
 
-    console.log(process.env.NODE_ENV);
-    
-
     hydrate(
         <Provider store={store}>
             <Router history={history}>

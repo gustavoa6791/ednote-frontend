@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../assets/styles/header.scss'
 import logo from '../assets/static/note.svg'
+import profile from '../assets/static/profile.svg'
 import { logoutRequest } from '../redux/actions/index'
 
 
@@ -36,12 +37,13 @@ const Header = ({ user }) => {
 
                 <div className="menu">
                 <div className="menu-profile">
-                    <img src={logo} alt="logo" className="profile-imagen" />
+                    <img src={profile} alt="logo" className="profile-imagen" />
                     <p className="profile-name" >{ user.name}</p>
                 </div>
 
                 <div className="menu-options">
                     <ul>
+                        <li><Link to="/Home" >Home</Link></li>
                         <li><Link to="/Profile" >Cuenta</Link></li>
                         <li><a href="/" onClick={handleLogout}>Cerrar Sesión</a></li>
                     </ul>

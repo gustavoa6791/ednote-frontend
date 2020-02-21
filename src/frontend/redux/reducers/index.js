@@ -20,6 +20,10 @@ const reducer = (state, action) => {
       return {
         ...state,
       };
+    case 'CHANGE_PROFILE_REQUEST':
+      return {
+        ...state,
+      };
     case 'LOGIN_REQUEST':
       return {
         ...state,
@@ -30,11 +34,11 @@ const reducer = (state, action) => {
         ...state,
         users: action.payload,
       };
-      case 'SEARCH_REQUEST':
-        return {
-         ...state,
-          users: action.payload,
-        };
+    case 'SEARCH_REQUEST':
+      return {
+        ...state,
+        users: action.payload,
+      };
     case 'LOGOUT_REQUEST':
       return {
         ...state,

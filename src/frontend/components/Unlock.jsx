@@ -1,74 +1,64 @@
 import React, { useState } from 'react';
 import { connect, useStore } from 'react-redux'
-import { searchUser, searchUserAll } from '../redux/actions/index'
+import { searchUser } from '../redux/actions/index'
 import { withRouter } from 'react-router-dom'
+import UserUnlock from './UserUnlock'
 import logo from '../assets/static/note.svg'
 
-//mport '../assets/styles/change.scss'
+import '../assets/styles/unlock.scss'
 
-const Unlock = (props, { users }) => {
+const Unlock = (props) => {
 
-   
+    const valores = Object.values(props.users)
+    const dibujarCeldas = valores.map((value, index) => {
+
+        return (
+            <UserUnlock key={index} user={value} />
+        )
+    })
 
     const [value, setValue] = useState({
 
     })
 
     const handleInput = event => {
+        props.searchUser(value)
         setValue({
             ...value,
             [event.target.name]: event.target.value
         })
-
-        
     }
 
     const handleSubmit = event => {
         event.preventDefault()
-        props.searchUser(value)
-       
-
+        props.searchUser({ buscar: "@" })
     }
 
- 
-    const handleSubmitAll = event => {
-        event.preventDefault()
 
-       props.searchUserAll()
-
-    }
 
 
     return (
         <>
-            <section className="Profile">
+            <section className="unlock">
                 <h2>Desbloquear usuario</h2>
-                <div className="container-change">
+                <div className="container-unlock">
                     <form>
 
-                        <input name="buscar" onChange={handleInput} className="inp-profile" placeholder="Buscar usuario" />
-                        <button type="button" onClick={handleSubmit}>Buscar</button>
-                        <button type="button" onClick={handleSubmitAll}>Ver todos</button>
+                        <input autoComplete="off" name="buscar" onChange={handleInput} className="inp-unlock" placeholder="Buscar usuario" />
+                        <button type="button" onClick={handleSubmit}>Buscar todos</button>
+
                     </form>
                     <div className="result">
-                        <ul>
-                            {
-                            //   users.map((value,index) => {
-                            //             return (
-                            //                 hola
-                            //         // <Celda
-                            //         //         key={index}
-                            //         //         value={value == 0 ? "" : value}
-                            //         //         onChange={this.props.onChange}
-                            //         //         index={index}
-                            //         //     />
-                            //             )
-                            //           })
-                                  
-                                
-                                
-                            }
-                        </ul>
+                        <div className='User-header'>
+                            <div>Nombre</div>
+                            <div>Email</div>
+                            <div>Roles</div>
+                            <div>¿Bloqueado? </div>
+                            <div>Desbloquear</div>
+                        </div>
+
+                        {dibujarCeldas}
+
                     </div>
                 </div>
 
@@ -84,7 +74,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    searchUserAll,
+
     searchUser,
 
 };

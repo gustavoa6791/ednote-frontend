@@ -1,0 +1,40 @@
+.User{
+    display: grid;
+    grid-template-columns: 15% 30% 25% 12% 20%;
+    height: 40px;
+    border: 0.5px #F0544F solid ;
+    padding: 0px 10px;
+}
+.User div{
+    align-self: center;
+}
+
+.User-header div{
+    align-self: center;
+    color: white;
+}
+
+.User-header {
+    display: grid;
+    grid-template-columns: 15% 30% 25% 12% 20%;
+    height: 40px;
+    border: 0.5px #F0544F solid ;
+    padding: 0px 10px;
+    background-color:#F0544F;
+}
+
+
+
+.des{
+    background-color: #F0544F;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 20px;
+    margin:  0;
+}
+
+.des:hover{
+    background-color: #ad3f4c;
+    
+}

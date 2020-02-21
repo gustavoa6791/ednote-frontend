@@ -1,0 +1,46 @@
+
+.conteiner-menu {
+    
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    margin: 10px;
+   
+    
+}
+
+aside{
+    height: 100%;
+}
+
+.menuBar{
+    margin: 0;
+   
+    width: 100%;
+    
+    display: flex;
+}
+
+.conteiner-rol{
+   margin: 20px 0 0 0;
+   border: 0.5px #F0544F solid;
+   border-radius: 5px;
+   padding: 0px;
+}
+
+.hide-menu{
+    background-color: #F0544F ;
+    width: 20px;
+}
+
+.header-menu{
+    background-color: #F0544F;
+    color: white;
+    text-align: center;
+    padding: 0 10px;
+    
+}
+.option-menu{
+    padding: 5px 10px 5px 10px;
+}

@@ -1,0 +1,40 @@
+
+.unlock {
+    display: flex;
+    align-items: center;
+    
+    flex-direction: column;
+    min-height: calc(120vh - 400px);
+    
+   
+
+}
+
+.container-unlock{
+    //background-color: rgba(255, 255, 255, 0.788);
+    padding: 20px;
+    border: 2px #F0544F solid;
+    border-radius: 20px;
+    width: 80%;
+}
+
+.inp-unlock{
+    background-color: white;
+    color: #F0544F;
+    padding: 12px 100px 12px 10px;
+    border: 2px #F0544F solid;
+    border-radius: 20px;
+    margin:  0 20px;
+  
+    
+
+}
+.inp-unlock::placeholder { color: #F0544F; }
+
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+

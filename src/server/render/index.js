@@ -24,7 +24,7 @@ const render = (html, preloadedState)=>{
     
     <body>
         <div id="app">${html}</div>
-        <p>${process.env.NODE_ENV}</p>
+      
         <script>
         
         // WARNING: See the following for security issues around embedding JSON in HTML:

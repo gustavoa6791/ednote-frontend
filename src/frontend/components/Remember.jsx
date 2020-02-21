@@ -31,7 +31,7 @@ const Remember = props => {
         <>
             <section className="remember">
 
-            <h2>Recordar contraseña</h2>
+            <h2 className= "title-rem">Recordar contraseña</h2>
                 <div className="container-rem">
                     <div className="formulario-rem" >
                         <div>

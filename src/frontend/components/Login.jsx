@@ -29,7 +29,7 @@ const Login = props => {
         <>
             <section className="login">
                 <div className="container">
-                    <h2>Inicia Sesión</h2>
+                    <h2 className="title-login">Inicia Sesión</h2>
 
                     <div className="formulario" >
                         <form >

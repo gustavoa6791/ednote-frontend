@@ -4,8 +4,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    min-height: calc(100vh - 200px);
-    border: 2px #F0544F solid;
    
 
 }
@@ -16,6 +14,10 @@
     border: 2px #F0544F solid;
     border-radius: 20px;
     width: 300px;
+    margin: 50px;
+}
+.title-login{
+    margin: 20px;
 }
 
 .formulario form{
@@ -28,7 +30,7 @@
     background-color: transparent;
     border: none;    
     border-bottom: 2px #F0544F solid ;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     padding: 0 0 10px 20px;
     outline: none;
 }
