@@ -7,14 +7,20 @@ const reducer = (state, action) => {
         ...state,
         myList: [...state.myList, action.payload],
       };
+      case 'UNLOCK_REQUEST':
+        return {
+           ...state,
+        };
+
+      
     case 'DELETE_FAVORITE':
       return {
         ...state,
         myList: state.myList.filter(items => items.id !== action.payload),
       };
-    case 'REMEMBER_REQUEST':
+   case 'REMEMBER_REQUEST':
       return {
-        ...state,
+         ...state,
       };
     case 'CHANGE_REQUEST':
       return {

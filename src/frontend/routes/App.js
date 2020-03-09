@@ -7,6 +7,7 @@ import RememberPage from '../containers/RememberPage.jsx'
 import ChangePage from '../containers/ChangePage.jsx'
 import ProfilePage from '../containers/ProfilePage.jsx'
 import UnlockPage from '../containers/UnlockPage.jsx'
+import SubjectPage from '../containers/SubjectPage.jsx'
 
 
 const App = () => (
@@ -19,6 +20,7 @@ const App = () => (
             <Route exact path="/Change" component={ChangePage} />
             <Route exact path="/Profile" component={ProfilePage} />
             <Route exact path="/Unlock" component={UnlockPage}/>
+            <Route exact path="/Subjects" component={SubjectPage}/>
             <Route component={NotFound}/>
         </Switch>
 

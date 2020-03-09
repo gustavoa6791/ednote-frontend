@@ -37,6 +37,11 @@ export const rememberRequest = payload => ({
   payload,
 });
 
+export const unlockRequest = payload => ({
+  type: 'UNLOCK_REQUEST',
+  payload,
+});
+
 export const changeRequest = payload => ({
   type: 'CHANGE_REQUEST',
   payload,
@@ -244,3 +249,32 @@ export const changeProfile = (data) => {
       });
   };
 };
+
+
+export const unlockUser = (data, url) => {
+  return (dispatch) => {
+    axios({
+      url: '/auth/unlock',
+      method: 'post',
+      data: {
+        data : data
+      },
+    })
+      .then(({ data }) => {
+        dispatch(unlockRequest(data));
+      })
+
+      
+      .then(() => {
+        
+          window.location.href = url;
+
+      })
+
+      .catch(function (err) {
+
+        dispatch(setError(err))
+      });
+  };
+};
+

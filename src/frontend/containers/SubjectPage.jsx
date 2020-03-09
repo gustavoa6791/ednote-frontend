@@ -1,18 +1,19 @@
 import React from 'react';
 import Header from '../components/Header.jsx'
-import Unlock from '../components/Unlock.jsx'
+import SubjectList from '../components/SubjectList.jsx';
 import MenuBar from '../components/MenuBar.jsx';
-
+ 
 import '../assets/styles/App.scss'
 
-const UnlockPage = () => {
+
+const SubjectPage = () => {
     return (
         <div className="page">
             <Header className="header"/>
             <MenuBar className="menubar"/>
-            <Unlock className="section"/>
+            <SubjectList className="section"/>
         </div>
     );
 }
 
-export default UnlockPage;
+export default SubjectPage;

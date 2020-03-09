@@ -1,5 +1,4 @@
-import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
 import LoginPage from '../containers/LoginPage.jsx'
 import NotFound from '../containers/NotFound.jsx'
 import HomePage from '../containers/HomePage.jsx'
@@ -7,6 +6,7 @@ import RememberPage from '../containers/RememberPage.jsx'
 import ChangePage from '../containers/ChangePage.jsx'
 import ProfilePage from '../containers/ProfilePage.jsx'
 import UnlockPage from '../containers/UnlockPage.jsx'
+import SubjectPage from '../containers/SubjectPage'
 
 const serverRoutes = [
     {
@@ -37,6 +37,11 @@ const serverRoutes = [
     {
         path:'/Change',
         component: ChangePage,
+        exact: true,
+    },
+    {
+        path:'/Subjects',
+        component: SubjectPage,
         exact: true,
     },
     {

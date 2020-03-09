@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
-import { loginUser } from '../redux/actions/index'
+import { unlockUser } from '../redux/actions/index'
 import { withRouter, Link } from 'react-router-dom'
 
 import '../assets/styles/userUnlock.scss'
@@ -13,7 +13,12 @@ const UserUnlock = props => {
    const diferencia = ((new Date().toISOString()) - chance[0]) / (1000*60)
    const isLocked = chance[1] >= 3  
     
+   const handleSubmit = event => {
     
+    
+   
+    props.unlockUser(email, "/Unlock")
+}
 
 
     return (
@@ -23,11 +28,17 @@ const UserUnlock = props => {
            <div>{email}</div>
            <div>{rol}</div>
            <div>{ isLocked? "si" : "no"}</div>
-           <div>{isLocked ? <button className="des">"Desbloquear"</button>:""}</div>
+           <div>{isLocked ? <button className="des" onClick={handleSubmit}>"Desbloquear"</button>:""}</div>
     
         </div>
     );
 }
 
+const mapDispatchToProps = {
 
-export default UserUnlock
+    unlockUser,
+
+};
+
+
+export default connect(null, mapDispatchToProps)(UserUnlock)

@@ -106,9 +106,13 @@ app.post('/auth/change', async function (req, res, next) {
         data: req.body
       }
     }).then(
-      res.send("ok")
+     
+      
+      res.send(200)
     )
   } catch (error) {
+   
+    
     next(error)
   }
 });
@@ -129,6 +133,28 @@ app.post('/auth/changeProfile', async function (req, res, next) {
     next(error)
   }
 });
+
+//----------------------------------------
+app.post('/auth/unlock', async function (req, res, next) {
+  try {
+    await axios({
+      url: `${process.env.API_URL}/api/auth/unlock`,
+      method: "post",
+      data: {
+        data: req.body
+      }
+    }).then(
+      res.send(200)
+    )
+  } catch (error) {
+
+    
+    
+    next(error)
+  }
+});
+
+
 
 //----------------------------------------
 app.post('/auth/search', async function (req, res, next) {

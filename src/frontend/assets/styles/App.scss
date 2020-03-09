@@ -14,33 +14,21 @@ html{
 .header {
     grid-area: header;
   }
-.main {
-    grid-area: main;
-  }
 .menuBar {
     grid-area: sidebar;
   }
-  .unlocked {
-    grid-area: unlocked;
+  .section {
+    grid-area: section;
   }
   
   
-  .homepage {
+  .page {
       height: 100%;
     display: grid;
     grid-template-columns: 15% 85%;
     grid-template-rows: auto 100%;
     grid-template-areas: 
       "header  header "
-      "sidebar  main";
+      "sidebar  section";
   }
 
-  .unlockpage {
-    height: 100%;
-  display: grid;
-  grid-template-columns: 15% 85%;
-  grid-template-rows: auto 100%;
-  grid-template-areas: 
-    "header  header "
-    "sidebar  unlocked";
-}
