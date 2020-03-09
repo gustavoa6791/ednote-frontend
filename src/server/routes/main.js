@@ -26,27 +26,9 @@ const main = (req, res, next) => {
                 users: {
 
                 },
-                subjects: [
-                    {
-                        id:"1",
-                        name: "calculo 2",
-                        code: "101010M",
-                        group: 50
-                    },
-                    {
-                        id:"2",
-                        name: "introduccion a la tecnologia en sistemas",
-                        code: "101015M",
-                        group: 50
-                    },
-                    {
-                        id:"3",
-                        name: "matematicas discretas",
-                        code: "505050M",
-                        group: 55
-                    },
-
-                ]
+                subjects: {
+                    
+                }
             }
         } catch (error) {
 

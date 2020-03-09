@@ -32,6 +32,14 @@ export const loginRequest = payload => ({
 });
 
 
+
+
+export const getSubjectsRequest = payload => ({
+  type: 'SUBJECTS_REQUEST',
+  payload,
+});
+
+
 export const rememberRequest = payload => ({
   type: 'REMEMBER_REQUEST',
   payload,
@@ -251,6 +259,7 @@ export const changeProfile = (data) => {
 };
 
 
+
 export const unlockUser = (data, url) => {
   return (dispatch) => {
     axios({
@@ -277,4 +286,26 @@ export const unlockUser = (data, url) => {
       });
   };
 };
+
+export const getSubjects = (data) => {
+
+  return (dispatch) => {
+    axios({
+      url: '/getSubjects',
+      method: 'post',
+      data: {
+        data : data
+      },
+    })
+      .then(({ data }) => {
+        dispatch(getSubjectsRequest(data));
+      })
+
+      .catch(function (err) {
+
+        dispatch(setError(err))
+      });
+  };
+};
+
 

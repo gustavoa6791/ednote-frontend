@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import {rememberPassword} from '../redux/actions/index'
-import {withRouter} from 'react-router-dom'
+
 
 
 import '../assets/styles/remenber.scss'
@@ -69,4 +69,4 @@ const mapDispatchToProps={
     rememberPassword
 }
 
-export default withRouter(connect(null,mapDispatchToProps)(Remember))
+export default connect(null,mapDispatchToProps)(Remember)

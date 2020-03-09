@@ -1,19 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import '../assets/styles/header.scss'
+import {getSubjects} from '../redux/actions/index'
+
 import arrow from '../assets/static/arrow.svg'
-import profile from '../assets/static/profile.svg'
-import { logoutRequest } from '../redux/actions/index'
-
 import '../assets/styles/menu.scss'
+ 
 
+const MenuBAr = (props) => {
 
-const MenuBAr = ({ user }) => {
+    const roles = props.user.rol.split(",")
 
-    const roles = user.rol.split(",")
+   function subjects() {
 
-    console.log();
+        props.getSubjects(props.user.id)
+       
+   }
 
 
 
@@ -40,7 +42,7 @@ const MenuBAr = ({ user }) => {
                     <div className="conteiner-rol">
                         <div className="header-menu">Profesor</div>
                         <Link to = "/Subjects">
-                            <div className="option-menu">Ver materias</div>
+                            <div className="option-menu" onClick={subjects}>Ver materias</div>
                         </Link>
                         <Link to = "/Subjects">
                             <div className="option-menu">Modificar plantillas</div>
@@ -72,13 +74,15 @@ const MenuBAr = ({ user }) => {
 
 const mapStateToProps = state => {
     return {
-        user: state.user,
+      subjects: state.subjects,
+      user: state.user
     }
-}
-
-const mapDispatchToProps = {
-    logoutRequest,
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(MenuBAr)
+  }
+  
+  const mapDispatchToProps = {
+   getSubjects,
+  };
+  
+  
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(MenuBAr)

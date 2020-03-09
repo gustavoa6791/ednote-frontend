@@ -2,11 +2,14 @@
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'SET_FAVORITE':
+  
+    case 'SUBJECTS_REQUEST':
+      
       return {
         ...state,
-        myList: [...state.myList, action.payload],
+        subjects: [ ...action.payload.data],
       };
+    
       case 'UNLOCK_REQUEST':
         return {
            ...state,
