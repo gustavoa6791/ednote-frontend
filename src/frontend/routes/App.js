@@ -8,6 +8,7 @@ import ChangePage from '../containers/ChangePage.jsx'
 import ProfilePage from '../containers/ProfilePage.jsx'
 import UnlockPage from '../containers/UnlockPage.jsx'
 import SubjectPage from '../containers/SubjectPage.jsx'
+import EditSubjectPage from '../containers/EditSubjectPage.jsx'
 
 
 const App = () => (
@@ -21,6 +22,7 @@ const App = () => (
             <Route exact path="/Profile" component={ProfilePage} />
             <Route exact path="/Unlock" component={UnlockPage}/>
             <Route exact path="/Subjects" component={SubjectPage}/>
+            <Route exact path="/EditSubject" component={EditSubjectPage}/>
             <Route component={NotFound}/>
         </Switch>
 

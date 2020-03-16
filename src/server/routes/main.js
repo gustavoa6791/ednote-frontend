@@ -28,7 +28,8 @@ const main = (req, res, next) => {
                 },
                 subjects: {
                     
-                }
+                },
+                editSubject: null
             }
         } catch (error) {
 

@@ -2,6 +2,13 @@
 
 const reducer = (state, action) => {
   switch (action.type) {
+
+    case  'EDITSUB_REQUEST':
+      console.log(action.payload);
+      return {
+        ...state,
+        editSubject: action.payload,
+      };
   
     case 'SUBJECTS_REQUEST':
       

@@ -50,6 +50,11 @@ export const unlockRequest = payload => ({
   payload,
 });
 
+export const editSubRequest = payload => ({
+  type: 'EDITSUB_REQUEST',
+  payload,
+});
+
 export const changeRequest = payload => ({
   type: 'CHANGE_REQUEST',
   payload,
@@ -73,6 +78,13 @@ export const registerUser = (payload, redirecUrl) => {
       .catch(err => dispatch(setError(err)));
   };
 };
+
+export const editSub = (payload, redirecUrl) => {
+  console.log(payload);
+  
+
+  }
+
 
 export const changePassword = ({email, password, codigo}) => {
   return (dispatch) => {
