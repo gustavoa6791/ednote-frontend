@@ -12,10 +12,14 @@ const MenuBAr = (props) => {
     const roles = props.user.rol.split(",")
 
    function subjects() {
-
+       if(props.subjects == ""){
         props.getSubjects(props.user.id)
+       }
        
    }
+
+   const show = 1
+   const edit = 2
 
 
 
@@ -41,11 +45,11 @@ const MenuBAr = (props) => {
                     :
                     <div className="conteiner-rol">
                         <div className="header-menu">Profesor</div>
-                        <Link to = "/Subjects">
-                            <div className="option-menu" onClick={subjects}>Ver materias</div>
+                        <Link to = {`/Subjects/show`}  > 
+                            <div className="option-menu" onClick={subjects} >Ver materias</div>
                         </Link>
-                        <Link to = "/Subjects">
-                            <div className="option-menu">Modificar plantillas</div>
+                        <Link to = {`/Subjects/edit`}  >
+                            <div className="option-menu" onClick={subjects} >Modificar plantillas</div>
                         </Link>
 
 

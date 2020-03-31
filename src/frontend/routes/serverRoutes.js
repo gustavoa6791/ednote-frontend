@@ -7,7 +7,8 @@ import ChangePage from '../containers/ChangePage.jsx'
 import ProfilePage from '../containers/ProfilePage.jsx'
 import UnlockPage from '../containers/UnlockPage.jsx'
 import SubjectPage from '../containers/SubjectPage'
-import EditSubjectPage from '../containers/EditSubjectPage.jsx'
+import ShowOrEditSubjectPage from '../containers/ShowOrEditSubjectPage.jsx'
+
 
 const serverRoutes = [
     {
@@ -41,13 +42,13 @@ const serverRoutes = [
         exact: true,
     },
     {
-        path:'/Subjects',
+        path:'/Subjects/:option',
         component: SubjectPage,
         exact: true,
     },
     {
-        path:'/EditSubject',
-        component: EditSubjectPage,
+        path:'/ShowSubject/:option/:subject',
+        component: ShowOrEditSubjectPage ,
         exact: true,
     },
     {

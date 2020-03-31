@@ -23,13 +23,10 @@ const main = (req, res, next) => {
                     name,
                     rol,
                 },
-                users: {
-
-                },
-                subjects: {
-                    
-                },
-                editSubject: null
+                users: {},
+                subjects: "",
+                indexEditSubjects: null,
+                editSubject: {}
             }
         } catch (error) {
 

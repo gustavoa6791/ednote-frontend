@@ -15,18 +15,23 @@ const SubjectList = props => {
   const valores = Object.values(subjects);
 
   const handle = (e) => {
-    props.editSubRequest(e);
+    props.editSubRequest(subjects[e], e);
   }
 
   return (
 
-
     <section className="subjectlist">
+      <div>{
+        props.title=="show"?
+          <h1>Materias</h1>
+        :
+          <h1>Editar Materias</h1>
+      }</div>
+       
+      
       <div className="subjectlist-container">
         {valores.map((item, index) =>
-          
-            <Subject key={item.id} index={index} handleClick={(e) => { handle(e) }} {...item} />
-          
+          <Subject key={item.id} index={index} handleClick={(e) => { handle(e) }} {...item} itemEdit={item} option={props.title}/>
         )}
       </div>
     </section >

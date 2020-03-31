@@ -5,9 +5,7 @@
     justify-content: center;
     flex-direction: column;
     width: 80%;
-    margin: 10px;
-   
-    
+    margin: 10px;  
 }
 
 aside{
@@ -16,16 +14,14 @@ aside{
 
 .menuBar{
     margin: 0;
-   
     width: 100%;
-    
     display: flex;
 }
 
 .conteiner-rol{
    margin: 20px 0 0 0;
-   border: 0.5px #F0544F solid;
-   border-radius: 5px;
+ 
+   border: 0.5px #F0544F solid !important;
    padding: 0px;
 }
 

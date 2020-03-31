@@ -1,17 +1,10 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import '../assets/styles/showSubject.scss'
 
-import React from 'react';
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import '../assets/styles/subjectHeader.scss'
+const ShowSubject = props => {
 
-const SubjectHeader = props => {
-
-  var columnas = {
-    
-    talleres: ["taller1", "taller2"],
-    quizes: ["quizes", "quiz1"],
-    parciales: ["parcial1", "parcial2"],
-  }
+  var columnas = props.editSubject[props.subject].notes
   const arrayKeys = Object.keys(columnas)
   const arrayValues = Object.values(columnas)
 
@@ -70,16 +63,19 @@ const SubjectHeader = props => {
 
   return (
     <div className="subjectHeader">
-      <div>
+      <div className="subjectHeader-title">
+        <h1>{props.editSubject[props.subject].name}</h1>
+        <h5>Codigo de asignatura: {props.editSubject[props.subject].code}</h5>
+        <h5>Grupo: {props.editSubject[props.subject].group}</h5>
 
       </div>
       <table className="table table-sm table-bordered table-header">
         <thead >
           <tr >
-            {/* <th scope="col" rowSpan="2">Codigo</th>
-            <th scope="col" rowSpan="2" width="300px" >Nombre</th> */}{
-              arrayKeys.map((item, index) => {
-                return <th key={index}  scope="col" colSpan={arrayValues[index].length} >{item}</th>
+            <th scope="col" rowSpan="2">Codigo</th>
+                        <th scope="col" rowSpan="2" width="300px" >Nombre</th>
+             { arrayKeys.map((item, index) => {
+                return <th key={index} scope="col" colSpan={arrayValues[index].length} >{item}</th>
               })
             }</tr>
           <tr>{
@@ -98,8 +94,21 @@ const SubjectHeader = props => {
 
     </div>
   )
+
+
 }
 
+const mapStateToProps = state => {
+  return {
+    editSubject: state.subjects,
+  }
 
-export default SubjectHeader;
+}
 
+const mapDispatchToProps = {
+
+
+};
+
+
+export default connect(mapStateToProps, null)(ShowSubject)

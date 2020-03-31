@@ -4,30 +4,31 @@ const reducer = (state, action) => {
   switch (action.type) {
 
     case  'EDITSUB_REQUEST':
-      console.log(action.payload);
       return {
         ...state,
         editSubject: action.payload,
+        indexEditSubjects: action.index
       };
   
     case 'SUBJECTS_REQUEST':
-      
       return {
         ...state,
         subjects: [ ...action.payload.data],
       };
-    
+      case 'SET_SUBJECTS_REQUEST':
+
+        console.log(action.payload);
+          return {
+            ...state,
+            subjects:  action.payload,
+          };
+
+
       case 'UNLOCK_REQUEST':
         return {
            ...state,
         };
 
-      
-    case 'DELETE_FAVORITE':
-      return {
-        ...state,
-        myList: state.myList.filter(items => items.id !== action.payload),
-      };
    case 'REMEMBER_REQUEST':
       return {
          ...state,
@@ -45,6 +46,11 @@ const reducer = (state, action) => {
         ...state,
         user: action.payload,
       };
+    case 'LOGIN_REQUEST':
+      return {
+        ...state,
+          subjectEdit: action.payload,
+    };
     case 'SEARCH_REQUEST':
       return {
         ...state,
@@ -65,13 +71,7 @@ const reducer = (state, action) => {
         ...state,
         user: action.payload,
       };
-    case 'GET_VIDEO_SOURCE':
-      return {
-        ...state,
-        playing: state.trends.find(item => item.id === Number(action.payload)) ||
-          state.originals.find(item => item.id === Number(action.payload)) ||
-          [],
-      };
+
     default:
       return state;
   }

@@ -6,6 +6,11 @@ export const setError = payload => ({
   payload,
 });
 
+export const modifyRequest = payload => ({
+  type: 'MODIFY_REQUEST',
+  payload,
+});
+
 export const registerRequest = payload => ({
   type: 'REGISTER_REQUEST',
   payload,
@@ -38,6 +43,11 @@ export const getSubjectsRequest = payload => ({
   type: 'SUBJECTS_REQUEST',
   payload,
 });
+export const setSubjectsRequest = payload => ({
+  type: 'SET_SUBJECTS_REQUEST',
+  payload,
+});
+
 
 
 export const rememberRequest = payload => ({
@@ -50,9 +60,10 @@ export const unlockRequest = payload => ({
   payload,
 });
 
-export const editSubRequest = payload => ({
+export const editSubRequest = (payload,index) => ({
   type: 'EDITSUB_REQUEST',
   payload,
+  index
 });
 
 export const changeRequest = payload => ({

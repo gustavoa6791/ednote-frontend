@@ -8,10 +8,12 @@ import ChangePage from '../containers/ChangePage.jsx'
 import ProfilePage from '../containers/ProfilePage.jsx'
 import UnlockPage from '../containers/UnlockPage.jsx'
 import SubjectPage from '../containers/SubjectPage.jsx'
-import EditSubjectPage from '../containers/EditSubjectPage.jsx'
+import ShowOrEditSubjectPage from '../containers/ShowOrEditSubjectPage.jsx'
 
+const hola= {}
 
 const App = () => (
+    
 
     <BrowserRouter>
         <Switch>
@@ -21,8 +23,8 @@ const App = () => (
             <Route exact path="/Change" component={ChangePage} />
             <Route exact path="/Profile" component={ProfilePage} />
             <Route exact path="/Unlock" component={UnlockPage}/>
-            <Route exact path="/Subjects" component={SubjectPage}/>
-            <Route exact path="/EditSubject" component={EditSubjectPage}/>
+            <Route exact path="/Subjects/:option" component={SubjectPage}/>
+            <Route exact path= "/ShowSubject/:option/:subject" component={ShowOrEditSubjectPage} />
             <Route component={NotFound}/>
         </Switch>
 

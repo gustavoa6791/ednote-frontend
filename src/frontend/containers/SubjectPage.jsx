@@ -6,12 +6,12 @@ import MenuBar from '../components/MenuBar.jsx';
 import '../assets/styles/App.scss'
 
 
-const SubjectPage = () => {
+const SubjectPage = props => { 
     return (
         <div className="page">
             <Header className="header"/>
             <MenuBar className="menubar"/>
-            <SubjectList className="section"/>
+            <SubjectList className="section" title={props.match.params.option}/>
         </div>
     );
 }
