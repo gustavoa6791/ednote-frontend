@@ -1,14 +1,40 @@
 .subjectHeader-title{
     margin: 0 5%;
 }
+.subjectHeader{
+    overflow: scroll;
+}
+
+
 .table-header{
     margin: 1% 5%;
     max-width: 80%; 
+    border-top-left-radius: 20px;
+    overflow: scroll;
 }
+
+
+
+.table-header > thead{
+ 
+   
+    background-color: #F0544F;
+    color: white;
+ 
+}
+
+
+
+.edit-box-div{
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
 
 .edit-box{
     margin: 1% 5%;
 }
+
 
 .row-edit-box{
     padding: 8px;
@@ -57,3 +83,17 @@
 .option > div{ 
    margin: 0 5px;
 }
+
+.input-notes{
+    width: 50px;
+}
+
+.porcentaje{
+    width: 50px;
+}
+
+.por{
+    white-space: nowrap
+
+}
+

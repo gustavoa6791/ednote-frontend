@@ -1,114 +1,161 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import '../assets/styles/showSubject.scss'
+import Controls from './Controls';
 
-const ShowSubject = props => {
+class ShowSubject extends Component {
 
-  var columnas = props.editSubject[props.subject].notes
-  const arrayKeys = Object.keys(columnas)
-  const arrayValues = Object.values(columnas)
+  constructor(props) {
+    super(props);
 
-  var alumnos = [
-    [123,
-      "jose perez",
-      4.0,
-      2.5,
-      2.5,
-      3.5,
-      4.5,
-      5,
-      3.5,
-      4.5,
-    ],
-    [
-      293,
-      "juan gomez",
-      4.0,
-      2.5,
-      2.5,
-      3.5,
-      4.5,
-      5,
-      3.5,
-      4.5,
+    this.state = {
+      info: props.editSubject,
+      index: props.subject
 
-    ],
-    [
-      334,
-      "pedro ruiz",
-      4.0,
-      2.5,
-      2.5,
-      3.5,
-      4.5,
-      5,
-      3.5,
-      4.5,
+    }
+  }
 
-    ],
-    [
-      445,
-      "maria uribe",
-      4.0,
-      2.5,
-      2.5,
-      3.5,
-      4.5,
-      5,
-      3.5,
-      4.5,
+  handleChange(e) {
 
-    ],
-  ]
+    const showSubject = this.state.info
 
-  return (
-    <div className="subjectHeader">
-      <div className="subjectHeader-title">
-        <h1>{props.editSubject[props.subject].name}</h1>
-        <h5>Codigo de asignatura: {props.editSubject[props.subject].code}</h5>
-        <h5>Grupo: {props.editSubject[props.subject].group}</h5>
+    var alumnos = showSubject.notesnumber
 
-      </div>
-      <table className="table table-sm table-bordered table-header">
-        <thead >
-          <tr >
-            <th scope="col" rowSpan="2">Codigo</th>
-                        <th scope="col" rowSpan="2" width="300px" >Nombre</th>
-             { arrayKeys.map((item, index) => {
-                return <th key={index} scope="col" colSpan={arrayValues[index].length} >{item}</th>
+    var editCell = e.target.name.split(" ")
+    alumnos[editCell[0]].notes[editCell[1]][editCell[2]] = e.target.value
+
+    this.setState({
+      info: showSubject
+    })
+
+
+
+  }
+
+  render() {
+
+    const showSubject = this.state.info
+
+    var columnas = showSubject.notes
+    const arrayKeys = Object.keys(columnas)
+    const arrayValues = Object.values(columnas)
+
+    var alumnos = showSubject.notesnumber
+
+    var porcHeader = showSubject.notesPheader
+    var porcItem = showSubject.notesPitem
+
+
+
+    for (let i = 0; i < alumnos.length; i++) {
+
+      const editalumno = alumnos[i]
+
+      const notas = editalumno.notes
+      const header = showSubject.notesPheader
+      const item = showSubject.notesPitem
+
+      const notasv = Object.values(notas)
+      const itemv = Object.values(item)
+
+      var promedio = 0.0
+
+      notasv.map((item, index) => {
+        item.map((item2, index2) => {
+          promedio += parseFloat(item2) * (parseFloat(itemv[index][index2]) / 100) * (parseFloat(header[index]) / 100)
+        })
+      })
+
+      alumnos[i].average = promedio.toFixed(2)
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+    return (
+      <div className="subjectHeader">
+        <div className="subjectHeader-title">
+          <h1>{showSubject.name}</h1>
+          <h5>Codigo de asignatura: {showSubject.code}</h5>
+          <h5>Grupo: {showSubject.group}</h5>
+        </div>
+        <div>
+          <Controls info={this.state.info} index={this.state.index} />
+        </div>
+        <table className="table table-sm table-bordered table-header">
+          <thead >
+            <tr >
+              <th scope="col" rowSpan="2">Codigo</th>
+              <th scope="col" rowSpan="2" width="300px" >Nombre</th>
+              {
+                arrayKeys.map((item, index) => {
+                  if (arrayValues[index].length != 0) {
+                    return <th key={index} scope="col" colSpan={arrayValues[index].length} >{item} &nbsp;{porcHeader[index]}%</th>
+                  } else {
+                    return ""
+                  }
+                })
+              }
+              <th scope="col" rowSpan="2">Promedio</th>
+            </tr>
+            <tr>{
+              arrayValues.map((item, index) => {
+                return (
+                  item.map((subitem, subindex) => {
+                    return <th key={subindex} scope="col"><span className="por">{subitem}</span>  {porcItem[arrayKeys[index]][subindex]}%</th>
+                  })
+                )
               })
             }</tr>
-          <tr>{
-            arrayValues.map((item, index) => {
-              return (
-                item.map((subitem, subindex) => {
-                  return <th key={subindex} scope="col">{subitem}</th>
-                })
-              )
-            })
-          }</tr>
-        </thead>
 
-      </table>
+          </thead>
+          <tbody>
+            {
+              alumnos.map((item, index) => {
+                const values = Object.values(item.notes)
+                const keys = Object.keys(item.notes)
+                return (
+                  <tr >
+                    <td scope="col">{item.code}</td>
+                    <td scope="col">{item.name}</td>
+                    {
+                      values.map((subitem, subindex) => {
+                        return (
+                          subitem.map((subsubitem, subsubindex) => {
 
-
-    </div>
-  )
-
-
+                            return <td scope="col"><input className="input-notes" name={`${index} ${keys[subindex]} ${subsubindex}`} onChange={() => { (this.handleChange(event)) }} width="10px" placeholder={subsubitem} type="number" /></td>
+                          })
+                        )
+                      })
+                    }
+                    <td scope="col">{item.average}</td>
+                  </tr>
+                )
+              })
+            }
+          </tbody>
+        </table>
+      </div>
+    )
+  }
 }
+
 
 const mapStateToProps = state => {
   return {
-    editSubject: state.subjects,
+    editSubject: state.editSubject,
+
   }
 
 }
-
-const mapDispatchToProps = {
-
-
-};
-
 
 export default connect(mapStateToProps, null)(ShowSubject)

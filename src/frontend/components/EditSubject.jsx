@@ -1,130 +1,89 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { editSubRequest } from '../redux/actions/index'
 import mas from '../assets/static/plus.png'
 import menos from '../assets/static/minus.png'
 import Controls from './Controls';
-
 
 class EditSubject extends Component {
 
   constructor(props) {
     super(props);
-    
-    this.state = {
-      info :  props.toEdit.notes,
-      index : props.indexToEdit
 
+    this.state = {
+      info: props.toEdit.notes,
+      infodata: props.toEdit.notesnumber,
+      index: props.indexToEdit,
+      porcHeader: props.porcHeader,
+      porcItem: props.porcItem,
+
+      edit:props.toEdit
     }
-      
   }
 
+  handleChange(e) {
+    var header = this.state.porcHeader
+    header[e.target.name] = e.target.value
+    this.setState({
+      porcHeader: header,
+    })
+  }
+
+  handleChange2(e) {
+    var items = this.state.porcItem
+    items[e.target.id][e.target.name] = e.target.value
+    this.setState({
+      porcItem: items,
+    })
+  }
 
   menosbtn(params) {
     const columnas = this.state.info
-    columnas[`${params}`].pop(`new ${params}`)
-    editSubRequest(columnas, this.state.index);
+    const notas = this.state.infodata
+    notas.forEach(element => {
+      element.notes[params].pop()
+    });
+    columnas[`${params}`].pop()
     this.setState({
       info: columnas
     })
-    console.log(this.state.info);
   }
-  masbtn(params) {
+
+  masbtn(params, nro) {
     const columnas = this.state.info
-    columnas[`${params}`].push(`new ${params}`)
-   editSubRequest(columnas, this.state.index);
-   this.setState({
-    info: columnas
-  })
-    console.log(this.state.info)
+    const notas = this.state.infodata
+    notas.forEach(element => {
+      element.notes[params].push('0')
+    });
+    columnas[`${params}`].push(`${params} ${nro}`)
+    this.setState({
+      info: columnas
+    })
   }
+
   agregarbtn(params) {
+    const columnas = this.state.info
+    const notas = this.state.infodata
+    const porc = this.state.porcHeader
+    notas.forEach(element => {
+      element.notes[params] = [`0`]
+    });
+    porc.push('0')
+    columnas[`${params}`] = [`${params}`]
+    this.setState({
+      info: columnas
+    })
+    document.getElementById('agregar').value = ""
+  }
 
-     const columnas = this.state.info
-
-     columnas[`${params}`] = [`${params}`]
-
-  // editSubRequest(columnas, this.state.index);
-
-   this.setState({
-    info: columnas
-  })
-  document.getElementById('agregar'). value= ""
-    console.log(this.state.info);
- }
-
- guardar () {
-  onClickSave(this.state.info, this.state.index)
-}
-
-
-
-
-  
 
   render() {
 
     const arrayKeys = Object.keys(this.state.info)
     const arrayValues = Object.values(this.state.info)
 
-    var alumnos = [
-      [123,
-        "jose perez",
-        4.0,
-        2.5,
-        2.5,
-        3.5,
-        4.5,
-        5,
-        3.5,
-        4.5,
-      ],
-      [
-        293,
-        "juan gomez",
-        4.0,
-        2.5,
-        2.5,
-        3.5,
-        4.5,
-        5,
-        3.5,
-        4.5,
-
-      ],
-      [
-        334,
-        "pedro ruiz",
-        4.0,
-        2.5,
-        2.5,
-        3.5,
-        4.5,
-        5,
-        3.5,
-        4.5,
-
-      ],
-      [
-        445,
-        "maria uribe",
-        4.0,
-        2.5,
-        2.5,
-        3.5,
-        4.5,
-        5,
-        3.5,
-        4.5,
-
-      ],
-    ]
-
-   
     return (
-  
 
-     <div className="subjectHeader">
+      <div className="subjectHeader">
         <div className="subjectHeader-title">
           <h1><span className="tag">EDITAR</span> {this.props.editSubject[this.props.subject].name}</h1>
           <h5>Codigo de asignatura: {this.props.editSubject[this.props.subject].code}</h5>
@@ -135,55 +94,52 @@ class EditSubject extends Component {
             <thead >
               <tr >{
                 arrayKeys.map((item, index) => {
-
-                  if (arrayValues[index].length != 0 ){
-                    return <th key={index} scope="col" colSpan={arrayValues[index].length} >{item}</th>
-                  }else{
+                  if (arrayValues[index].length != 0) {
+                    return <th key={index} scope="col" colSpan={arrayValues[index].length}  >{item} &nbsp;{this.state.porcHeader[index]}%</th>
+                  } else {
                     return ""
                   }
-                  
-                  
-                
                 })
               }</tr>
               <tr>{
                 arrayValues.map((item, index) => {
                   return (
                     item.map((subitem, subindex) => {
-                      return <th key={subindex} scope="col">{subitem}</th>
-                    })
+                      return <th key={subindex} scope="col"> <span className="por">{subitem}</span> {this.state.porcItem[arrayKeys[index]][subindex]}%</th>
+                    })        
                   )
                 })
               }</tr>
             </thead>
           </table>
         </div>
-        <Controls info ={this.state.info} index={this.state.index} />
-        <div >
+        <Controls info={this.state.edit} index={this.state.index} />
+        <div className="edit-box-div">
           <table className="edit-box">
             <tbody>{
               arrayKeys.map((item, index) => {
-                return <tr key={index}>
+                return <tr className="item" key={index}>
                   <th className="row-edit-box">{item}</th>
-                  <th className="row-edit-box"><span className="tag2" > {arrayValues[index].length}  </span></th>
-                  <th className="row-edit-box"><img src={menos} alt="" onClick={() => { this.menosbtn(item) }} />{"   "}<img src={mas} alt="" onClick={() => { this.masbtn(item) }} /></th>
-
+                  <th className="row-edit-box"><span className="tag2" > {arrayValues[index].length}  </span> &nbsp;&nbsp; % <input name={index} value={this.state.porcHeader[index]} onChange={() => { (this.handleChange(event)) }} className="porcentaje" type="number" /></th>
+                  <th className="row-edit-box"><img src={menos} alt="" onClick={() => { this.menosbtn(item) }} />{"   "}<img src={mas} alt="" onClick={() => { this.masbtn(item, (arrayValues[index].length + 1)) }} /></th>
+                  {arrayValues[index].map((subitem, subindex) => {
+                    return (<th className="row-edit-box"><p className="por">{`${subitem} % `}</p>  <input className="porcentaje" id={item} name={subindex} value={this.state.porcItem[arrayKeys[index]][subindex]} onChange={() => { (this.handleChange2(event)) }} type="number" /></th>)
+                  })}
                 </tr>
               })
             }<tr>
                 <th className="row-edit-box">Otros: </th>
                 <th className="row-edit-box"><input id="agregar" placeholder="Nombre" type="text" /></th>
-                <th ><button className="tag" 
-                onClick={() => { 
-                  const params = document.getElementById('agregar'). value
-                  this.agregarbtn(params) 
+                <th ><button className="tag"
+                  onClick={() => {
+                    const params = document.getElementById('agregar').value
+                    this.agregarbtn(params)
                   }}>Agregar</button></th>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-    
     );
   }
 }
@@ -192,18 +148,11 @@ const mapStateToProps = state => {
   return {
     editSubject: state.subjects,
     toEdit: state.editSubject,
-    indexToEdit: state.indexEditSubjects
+    indexToEdit: state.indexEditSubjects,
+    porcHeader: state.editSubject.notesPheader,
+    porcItem: state.editSubject.notesPitem
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-      onClickSave: (subject,index) => {
-         dispatch(editSubRequest (subject,index));
-      },
-  }
-}
+export default connect(mapStateToProps, null)(EditSubject)
 
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditSubject)
