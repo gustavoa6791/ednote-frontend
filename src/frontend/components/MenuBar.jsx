@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import {getSubjects} from '../redux/actions/index'
+import {getSubjects, getStudentSubjects} from '../redux/actions/index'
 
 import arrow from '../assets/static/arrow.svg'
 import '../assets/styles/menu.scss'
@@ -17,7 +17,11 @@ const MenuBAr = (props) => {
        }
        
    }
-
+    function subjectsStudent(){
+        if(props.subjects==""){
+            props.getStudentSubjects(props.user.id)
+        }
+    }
    const show = 1
    const edit = 2
 
@@ -37,7 +41,10 @@ const MenuBAr = (props) => {
                     :
                     <div className="conteiner-rol">
                         <div className="header-menu">Estudiante</div>
-                        <div className="option-menu">Ver materias</div>
+                        <Link to= "/StudentShow">
+                             <div className="option-menu" onClick={subjectsStudent}>Ver materias</div>
+                        </Link>
+                       
                         <div className="option-menu">Ver calendario</div>
                     </div >
                 )}
@@ -65,7 +72,7 @@ const MenuBAr = (props) => {
                         </Link>
 
                         <div className="option-menu">Crear materia</div>
-                        <div className="option-menu">Crear Usuaros</div>
+                    
                     </div>
                 )}
             </div>
@@ -85,6 +92,7 @@ const mapStateToProps = state => {
   
   const mapDispatchToProps = {
    getSubjects,
+   getStudentSubjects,
   };
   
   

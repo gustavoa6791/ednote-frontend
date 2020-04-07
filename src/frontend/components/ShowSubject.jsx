@@ -11,25 +11,23 @@ class ShowSubject extends Component {
     this.state = {
       info: props.editSubject,
       index: props.subject
-
     }
   }
 
   handleChange(e) {
-
     const showSubject = this.state.info
-
     var alumnos = showSubject.notesnumber
-
     var editCell = e.target.name.split(" ")
-    alumnos[editCell[0]].notes[editCell[1]][editCell[2]] = e.target.value
+
+    if (parseFloat(e.target.value) > 0 && parseFloat(e.target.value) <= 5 || e.target.value==""){
+      alumnos[editCell[0]].notes[editCell[1]][editCell[2]] = e.target.value
+    } else {
+      alumnos[editCell[0]].notes[editCell[1]][editCell[2]] = "0"
+    }
 
     this.setState({
       info: showSubject
     })
-
-
-
   }
 
   render() {
@@ -44,8 +42,6 @@ class ShowSubject extends Component {
 
     var porcHeader = showSubject.notesPheader
     var porcItem = showSubject.notesPitem
-
-
 
     for (let i = 0; i < alumnos.length; i++) {
 
@@ -62,7 +58,9 @@ class ShowSubject extends Component {
 
       notasv.map((item, index) => {
         item.map((item2, index2) => {
-          promedio += parseFloat(item2) * (parseFloat(itemv[index][index2]) / 100) * (parseFloat(header[index]) / 100)
+          if(item2!=""){
+             promedio += parseFloat(item2) * (parseFloat(itemv[index][index2]) / 100) * (parseFloat(header[index]) / 100)
+          }
         })
       })
 
@@ -124,7 +122,7 @@ class ShowSubject extends Component {
                 const values = Object.values(item.notes)
                 const keys = Object.keys(item.notes)
                 return (
-                  <tr >
+                  <tr key={index}>
                     <td scope="col">{item.code}</td>
                     <td scope="col">{item.name}</td>
                     {
@@ -132,7 +130,7 @@ class ShowSubject extends Component {
                         return (
                           subitem.map((subsubitem, subsubindex) => {
 
-                            return <td scope="col"><input className="input-notes" name={`${index} ${keys[subindex]} ${subsubindex}`} onChange={() => { (this.handleChange(event)) }} width="10px" placeholder={subsubitem} type="number" /></td>
+                            return <td  key={subsubindex}scope="col"><input className="input-notes" name={`${index} ${keys[subindex]} ${subsubindex}`} onChange={() => { (this.handleChange(event)) }} width="10px"value={subsubitem} type="number" /></td>
                           })
                         )
                       })

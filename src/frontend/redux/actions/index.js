@@ -43,6 +43,10 @@ export const getSubjectsRequest = payload => ({
   type: 'SUBJECTS_REQUEST',
   payload,
 });
+export const getStudentSubjectsRequest = payload => ({
+  type: 'SUBJECTS_STUDENT_REQUEST',
+  payload,
+});
 export const setSubjectsRequest = payload => ({
   type: 'SET_SUBJECTS_REQUEST',
   payload,
@@ -322,6 +326,28 @@ export const getSubjects = (data) => {
     })
       .then(({ data }) => {
         dispatch(getSubjectsRequest(data));
+      })
+
+      .catch(function (err) {
+
+        dispatch(setError(err))
+      });
+  };
+};
+
+
+export const getStudentSubjects = (data) => {
+
+  return (dispatch) => {
+    axios({
+      url: '/getStudentSubjects',
+      method: 'post',
+      data: {
+        data : data
+      },
+    })
+      .then(({ data }) => {
+        dispatch(getStudentSubjectsRequest(data));
       })
 
       .catch(function (err) {

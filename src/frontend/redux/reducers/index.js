@@ -9,7 +9,15 @@ const reducer = (state, action) => {
         editSubject: action.payload,
         indexEditSubjects: action.index
       };
-  
+
+     
+      case  'SUBJECTS_STUDENT_REQUEST':
+        return {
+          ...state,
+          subjects: [ ...action.payload.data],
+        };
+
+
     case 'SUBJECTS_REQUEST':
       return {
         ...state,
@@ -17,7 +25,7 @@ const reducer = (state, action) => {
       };
       case 'SET_SUBJECTS_REQUEST':
 
-        console.log(action.payload);
+     
           return {
             ...state,
             subjects:  action.payload,

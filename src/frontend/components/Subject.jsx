@@ -8,12 +8,13 @@ import {modifyRequest }from '../redux/actions/index'
 const Subject = props => {
 
     const { index, name, code, group, option } = props
-    console.log(option);
+    var url=""
+
   
     return (
         <div name={index} onClick={() => { props.handleClick(index) }} className="subject">
-    
-            <Link to={`/ShowSubject/${option}/${index}`} >
+            
+            <Link to={option=="Student"? url=`/ShowSubjectStudent/${index}`:`/ShowSubject/${option}/${index}`}>
                 <div >
                     <img className="subject-img" src={fondo} alt={name} />
                     <div className="subject-details">
