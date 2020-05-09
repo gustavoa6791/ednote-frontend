@@ -8,20 +8,18 @@ class EditSubject extends Component {
 
   constructor(props) {
     super(props);
-
+ 
     this.state = {
-      info: props.toEdit.notes,
-      infodata: props.toEdit.notesnumber,
-      index: props.indexToEdit,
-      porcHeader: props.porcHeader,
-      porcItem: props.porcItem,
+      infoall :props.toEdit,
+      index: props.subject
 
-      edit: props.toEdit
     }
   }
 
   handleChange(e) {
-    var header = this.state.porcHeader
+    const info = this.state.infoall
+    var header = info.notesPheader
+
     if (e.target.value > 0 && e.target.value <= 100 ) {
       header[e.target.name] = e.target.value
     } else {
@@ -29,12 +27,14 @@ class EditSubject extends Component {
     }
 
     this.setState({
-      porcHeader: header,
+      infoall: info,
     })
   }
 
   handleChange2(e) {
-    var items = this.state.porcItem
+    const info = this.state.infoall
+
+    var items = info.notesPitem
 
     if (e.target.value > 0 && e.target.value <= 100 ) {
       items[e.target.id][e.target.name] = e.target.value
@@ -43,41 +43,51 @@ class EditSubject extends Component {
     }
     
     this.setState({
-      porcItem: items,
+      infoall: info,
     })
   }
 
   menosbtn(params) {
-    const columnas = this.state.info
-    const notas = this.state.infodata
+    const info = this.state.infoall
+    const columnas = info.notes
+    const notas = info.notesnumber
+    const porcI = info.notesPitem
+    
     notas.forEach(element => {
       element.notes[params].pop()
     });
+
     columnas[`${params}`].pop()
+    porcI[`${params}`].pop()
+
     this.setState({
-      info: columnas
+      infoall: info
     })
-  }
+  }porcItem
 
   masbtn(params, nro) {
-    const columnas = this.state.info
-    const notas = this.state.infodata
-    const porcI = this.state.porcItem
+    const info = this.state.infoall
+    const columnas = info.notes
+    const notas = info.notesnumber
+    const porcI = info.notesPitem
+
     notas.forEach(element => {
       element.notes[params].push('0')
     });
     columnas[`${params}`].push(`${params} ${nro}`)
     porcI[`${params}`].push(`0`)
     this.setState({
-      info: columnas
+      infoall: info
     })
   }
 
   agregarbtn(params) {
-    const columnas = this.state.info
-    const notas = this.state.infodata
-    const porc = this.state.porcHeader
-    const porcI = this.state.porcItem
+    const info = this.state.infoall
+    const columnas = info.notes
+    const notas = info.notesnumber
+    const porc = info.notesPheader
+    const porcI = info.notesPitem
+
     notas.forEach(element => {
       element.notes[params] = [`0`]
     });
@@ -85,7 +95,7 @@ class EditSubject extends Component {
     columnas[`${params}`] = [`${params}`]
     porcI[`${params}`] = [`0`]
     this.setState({
-      info: columnas
+      infoall: info
     })
     document.getElementById('agregar').value = ""
   }
@@ -93,8 +103,14 @@ class EditSubject extends Component {
 
   render() {
 
-    const arrayKeys = Object.keys(this.state.info)
-    const arrayValues = Object.values(this.state.info)
+    const info = this.state.infoall
+    const columnas = info.notes
+    const notas = info.notesnumber
+    const porc = info.notesPheader
+    const porcI = info.notesPitem
+
+    const arrayKeys = Object.keys(columnas)
+    const arrayValues = Object.values(columnas)
 
     const mensaje1 = 'La suma de los porcentajes debe ser 100% ❌️'
     const mensaje2 = "la suma es igual a 100% ✔️"
@@ -106,9 +122,9 @@ class EditSubject extends Component {
 
       <div className="subjectHeader">
         <div className="subjectHeader-title">
-          <h1><span className="tag">EDITAR</span> {this.props.editSubject[this.props.subject].name}</h1>
-          <h5>Codigo de asignatura: {this.props.editSubject[this.props.subject].code}</h5>
-          <h5>Grupo: {this.props.editSubject[this.props.subject].group}</h5>
+          <h1><span className="tag">EDITAR</span> {this.state.infoall.name}</h1>
+          <h5>Codigo de asignatura: {this.state.infoall.code}</h5>
+          <h5>Grupo: {this.state.infoall.group}</h5>
         </div>
         <div>
           <table className="table table-sm table-bordered table-header">
@@ -116,7 +132,7 @@ class EditSubject extends Component {
               <tr >{
                 arrayKeys.map((item, index) => {
                   if (arrayValues[index].length != 0) {
-                    return <th key={index} scope="col" colSpan={arrayValues[index].length}  >{item} &nbsp;{this.state.porcHeader[index]}%</th>
+                    return <th key={index} scope="col" colSpan={arrayValues[index].length}  >{item} &nbsp;{porc[index]}%</th>
                   } else {
                     return ""
                   }
@@ -126,7 +142,7 @@ class EditSubject extends Component {
                 arrayValues.map((item, index) => {
                   return (
                     item.map((subitem, subindex) => {
-                      return <th key={subindex} scope="col"> <span className="por">{subitem}</span>  {this.state.porcItem[arrayKeys[index]][subindex]} %</th>
+                      return <th key={subindex} scope="col"> <span className="por">{subitem}</span>  {porcI[arrayKeys[index]][subindex]} %</th>
                     })
                   )
                 })
@@ -134,25 +150,25 @@ class EditSubject extends Component {
             </thead>
           </table>
         </div>
-        <Controls info={this.state.edit} index={this.state.index} />
+        <Controls info={this.state.infoall} index={this.state.index} />
         <div className="edit-box-div">
           <table className="edit-box">
             <tbody>
               <tr>
-                <th>{this.state.porcHeader.map(i => { total += parseFloat(i) })}</th>
+                <th>{porc.map(i => { total += parseFloat(i) })}</th>
                 <th ><p className={`alert ${total != 100 ? 'error' : ''}`} >{total != 100 ? mensaje1 : mensaje2}</p></th>
               </tr>
               {
                 arrayKeys.map((item, index) => {
                   return <tr className="item" key={index}>
                     <th className="row-edit-box">{item}</th>
-                    <th className="row-edit-box"><span className="tag2" > {arrayValues[index].length}  </span> &nbsp;&nbsp; % <input name={index} value={this.state.porcHeader[index]} onChange={() => { (this.handleChange(event)) }} className="porcentaje" type="number" /></th>
+                    <th className="row-edit-box"><span className="tag2" > {arrayValues[index].length}  </span> &nbsp;&nbsp; % <input name={index} value={porc[index]} onChange={() => { (this.handleChange(event)) }} className="porcentaje" type="number" /></th>
                     <th className="row-edit-box"><img src={menos} alt="" onClick={() => { this.menosbtn(item) }} />{"   "}<img src={mas} alt="" onClick={() => { this.masbtn(item, (arrayValues[index].length + 1)) }} /></th>
-                    {this.state.porcItem[item].map(i => { total2 += parseFloat(i) })}
+                    {porcI[item].map(i => { total2 += parseFloat(i) })}
                     <th><p className={`alert p ${total2 != 100 ? 'error' : ''}`} > {total2 != 100 ? '❌️' : '✔️'}</p></th>
                     {arrayValues[index].map((subitem, subindex) => {
                       total2 = 0
-                      return (<th className="row-edit-box"><p className="por">{`${subitem} % `}</p>  <input className="porcentaje" id={item} name={subindex} value={this.state.porcItem[arrayKeys[index]][subindex]} onChange={() => { (this.handleChange2(event)) }} type="number" /></th>)
+                      return (<th className="row-edit-box"><p className="por">{`${subitem} % `}</p>  <input className="porcentaje" id={item} name={subindex} value={porcI[arrayKeys[index]][subindex]} onChange={() => { (this.handleChange2(event)) }} type="number" /></th>)
                     })}
                   </tr>
                 })
@@ -179,8 +195,7 @@ const mapStateToProps = state => {
     editSubject: state.subjects,
     toEdit: state.editSubject,
     indexToEdit: state.indexEditSubjects,
-    porcHeader: state.editSubject.notesPheader,
-    porcItem: state.editSubject.notesPitem
+
   }
 }
 

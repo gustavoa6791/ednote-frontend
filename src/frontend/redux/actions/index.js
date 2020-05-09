@@ -335,6 +335,27 @@ export const getSubjects = (data) => {
   };
 };
 
+export const setSubjects = (data) => {
+
+  return (dispatch) => {
+    axios({
+      url: '/setSubjects',
+      method: 'post',
+      data: {
+        data : data
+      },
+    })
+      .then(({ data }) => {
+        dispatch(setSubjectsRequest(data));
+      })
+
+      .catch(function (err) {
+
+        dispatch(setError(err))
+      });
+  };
+};
+
 
 export const getStudentSubjects = (data) => {
 

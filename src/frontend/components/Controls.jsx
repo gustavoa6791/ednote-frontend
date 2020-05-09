@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { editSubRequest, setSubjectsRequest } from '../redux/actions/index'
+import { editSubRequest, setSubjects} from '../redux/actions/index'
 
 const Controls = props => {
 
   const guardar = () => {
     props.subjects[props.index] = props.info
-    props.setSubjectsRequest(props.subjects)
+    props.setSubjects(props.subjects[props.index])
   }
 
   return (
@@ -25,7 +25,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = {
   editSubRequest,
-  setSubjectsRequest
+  setSubjects
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Controls)

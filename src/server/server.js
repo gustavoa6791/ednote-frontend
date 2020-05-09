@@ -199,8 +199,34 @@ app.post('/getSubjects', async function (req, res, next) {
 });
 
 
+
 //----------------------------------------
 
+//----------------------------------------
+app.post('/setSubjects', async function (req, res, next) {
+  
+  try {
+    
+    await axios({
+      
+      url: `${process.env.API_URL}/api/user-materias/set`,
+      method: "post",
+      data: {
+        data: req.body.data
+      }
+    }).then((dataU) => {
+      const { data } = dataU
+      res.status(200).json(data)
+    }
+    )
+  } catch (error) {
+    console.log(req.body.data);
+    next(error)
+  }
+});
+
+
+//----------------------------------------
 //----------------------------------------
 app.post('/getStudentSubjects', async function (req, res, next) {
   

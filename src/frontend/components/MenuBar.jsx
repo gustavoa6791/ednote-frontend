@@ -12,15 +12,15 @@ const MenuBAr = (props) => {
     const roles = props.user.rol.split(",")
 
    function subjects() {
-       if(props.subjects == ""){
+   
         props.getSubjects(props.user.id)
-       }
+    
        
    }
     function subjectsStudent(){
-        if(props.subjects==""){
+      
             props.getStudentSubjects(props.user.id)
-        }
+   
     }
    const show = 1
    const edit = 2

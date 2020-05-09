@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import '../assets/styles/showSubject.scss'
-import Controls from './Controls';
 
 class ShowSubjectStudent extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       info: props.editSubject,
       index: props.subject
@@ -96,22 +94,22 @@ class ShowSubjectStudent extends Component {
 
           </thead>
           <tbody>
-              <tr >
-                <td scope="col">{showalumno.code}</td>
-                <td scope="col">{showalumno.name}</td>
-                {
-                  values.map((subitem, subindex) => {
-                    return (
-                      subitem.map((subsubitem, subsubindex) => {
+            <tr >
+              <td scope="col">{showalumno.code}</td>
+              <td scope="col">{showalumno.name}</td>
+              {
+                values.map((subitem, subindex) => {
+                  return (
+                    subitem.map((subsubitem, subsubindex) => {
 
-                        return <td scope="col"><input className="input-notes"  value={subsubitem} type="number" disabled/></td>
-                      })
-                    )
-                  })
-                }
-                <td scope="col">{showalumno.average}</td>
-              </tr>
-              </tbody>
+                      return <td scope="col"><input className="input-notes" value={subsubitem} type="number" disabled /></td>
+                    })
+                  )
+                })
+              }
+              <td scope="col">{showalumno.average}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     )
