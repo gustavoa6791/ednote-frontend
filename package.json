@@ -15,7 +15,7 @@
     "@hapi/boom": "^9.0.0",
     "@types/react": "^16.9.19",
     "asset-require-hook": "^1.2.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.0.0",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
